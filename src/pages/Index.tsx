@@ -13,28 +13,31 @@ const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ticking = false;
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const el = document.documentElement;
-        const scrollTop = el.scrollTop;
-        const scrollHeight = el.scrollHeight - el.clientHeight;
+    let loopTriggered = false;
 
-        if (scrollTop >= scrollHeight - 2) {
-          // Fade out briefly then jump to top
+    const handleScroll = () => {
+      if (loopTriggered) return;
+      const el = document.documentElement;
+      const scrollTop = el.scrollTop;
+      const scrollHeight = el.scrollHeight - el.clientHeight;
+
+      if (scrollTop >= scrollHeight - 2) {
+        loopTriggered = true;
+
+        // Wait 1.5s so user sees the footer, then fade and loop
+        setTimeout(() => {
+          document.body.style.transition = "opacity 0.5s ease";
           document.body.style.opacity = "0";
-          document.body.style.transition = "opacity 0.3s ease";
+
           setTimeout(() => {
             window.scrollTo({ top: 0 });
             requestAnimationFrame(() => {
               document.body.style.opacity = "1";
+              loopTriggered = false;
             });
-          }, 300);
-        }
-        ticking = false;
-      });
+          }, 500);
+        }, 1500);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
