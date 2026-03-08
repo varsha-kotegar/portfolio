@@ -30,6 +30,7 @@ const Index = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-background">
+      <CustomCursor />
       <Navbar />
       <HeroSection />
       <div className="editorial-divider max-w-7xl mx-auto" />
