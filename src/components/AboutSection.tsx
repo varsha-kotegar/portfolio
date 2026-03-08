@@ -54,17 +54,6 @@ const AboutSection = () => {
                 Currently focused on full-stack development with React, Node.js, and exploring the intersections of AI with everyday applications.
               </p>
             </div>
-            <div className="editorial-divider" />
-            <div>
-              <p className="font-body text-sm tracking-[0.3em] uppercase text-accent mb-4">Tools & Technologies</p>
-              <div className="flex flex-wrap gap-3">
-                {["React", "Next.js", "TypeScript", "Node.js", "MongoDB", "Tailwind CSS", "Docker", "Git"].map((tool) => (
-                  <span key={tool} className="px-4 py-2 border border-border rounded-full text-sm font-body text-muted-foreground hover:border-accent hover:text-foreground transition-colors duration-300">
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
