@@ -15,14 +15,13 @@ const MagneticLink = ({ link }: { link: typeof links[0] }) => {
   return (
     <motion.a
       ref={magnetic.ref as any}
-      style={magnetic.style}
+      style={{ ...magnetic.style, borderColor: "rgba(0,0,0,0.15)", color: "#3A3A37" } as any}
       onMouseMove={magnetic.onMouseMove as any}
       onMouseLeave={magnetic.onMouseLeave as any}
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
       className="group px-6 py-3 border rounded-full font-body text-xs tracking-[0.25em] uppercase transition-all duration-300 hover:bg-foreground hover:text-background"
-      style={{ ...magnetic.style, borderColor: "rgba(0,0,0,0.15)", color: "#3A3A37" }}
       data-cursor="Open"
     >
       {link.label}
