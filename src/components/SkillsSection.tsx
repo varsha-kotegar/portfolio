@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Collectible from "@/components/Collectible";
 
 const skillCategories = [
   {
