@@ -108,7 +108,7 @@ const Navbar = () => {
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
-                  <span className="relative z-10">{item === "Home" ? "⌂" : item}</span>
+                  <span className="relative z-10">{item === "Home" ? <span className="text-base">⌂</span> : item}</span>
                 </button>
               </li>
             ))}
