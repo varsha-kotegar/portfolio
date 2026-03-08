@@ -28,7 +28,7 @@ const skillCategories = [
 
 const SkillsSection = () => {
   return (
-    <section className="section-padding bg-card">
+    <section id="skills" className="section-padding bg-card">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
