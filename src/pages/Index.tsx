@@ -13,15 +13,28 @@ const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const el = document.documentElement;
-      const scrollTop = el.scrollTop || document.body.scrollTop;
-      const scrollHeight = el.scrollHeight - el.clientHeight;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const el = document.documentElement;
+        const scrollTop = el.scrollTop;
+        const scrollHeight = el.scrollHeight - el.clientHeight;
 
-      // When user reaches the bottom, smoothly scroll to top
-      if (scrollTop >= scrollHeight - 5) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+        if (scrollTop >= scrollHeight - 2) {
+          // Fade out briefly then jump to top
+          document.body.style.opacity = "0";
+          document.body.style.transition = "opacity 0.3s ease";
+          setTimeout(() => {
+            window.scrollTo({ top: 0 });
+            requestAnimationFrame(() => {
+              document.body.style.opacity = "1";
+            });
+          }, 300);
+        }
+        ticking = false;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
