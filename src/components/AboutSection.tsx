@@ -11,8 +11,8 @@ const AboutSection = () => {
         {/* Mask reveal heading */}
         <div className="mb-16">
           <MaskRevealLines
-            lines={["The Story", "About"]}
-            lineClassName="first:font-body first:text-sm first:tracking-[0.3em] first:uppercase first:text-accent first:mb-4 last:editorial-heading last:text-5xl md:last:text-6xl lg:last:text-7xl last:font-bold last:text-foreground"
+            lines={["About"]}
+            lineClassName="editorial-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground"
           />
         </div>
 
