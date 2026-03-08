@@ -56,21 +56,32 @@ const ContactSection = () => {
 
     setStatus("sending");
 
-    // mailto fallback — opens the user's email client
-    const subject = encodeURIComponent(`Portfolio Contact from ${name.trim()}`);
-    const body = encodeURIComponent(
-      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\n${message.trim()}`
-    );
-    window.location.href = `mailto:varshakotegar26@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
 
-    // Show success after a brief delay (email client opens separately)
-    setTimeout(() => {
-      setStatus("success");
-      setName("");
-      setEmail("");
-      setMessage("");
-      setTimeout(() => setStatus("idle"), 5000);
-    }, 800);
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setStatus("success");
+        setName("");
+        setEmail("");
+        setMessage("");
+        // Reset success state after 5 seconds
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        console.error("Submission failed:", data.message);
+        setStatus("error");
+      }
+    } catch (error) {
+      console.error("Contact Form Error:", error);
+      setStatus("error");
+    }
   };
 
   return (
@@ -154,14 +165,14 @@ const ContactSection = () => {
                   id="contact-message"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  maxLength={1000}
+                  maxLength={2000}
                   required
                   rows={5}
                   placeholder="Tell me what's on your mind..."
                   className="w-full bg-transparent border-b border-border py-3 font-body text-base text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-accent transition-colors duration-300 resize-none"
                 />
                 <p className="text-right text-[11px] font-body text-muted-foreground/60 mt-1">
-                  {message.length}/1000
+                  {message.length}/2000
                 </p>
               </div>
 
