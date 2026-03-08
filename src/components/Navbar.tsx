@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Home, Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { usePageTransition } from "@/components/PageTransition";
 
 const navItems = ["Home", "Projects", "About", "Achievements", "Contact", "Blog"];
