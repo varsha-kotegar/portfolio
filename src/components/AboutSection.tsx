@@ -3,6 +3,7 @@ import { useRef } from "react";
 import profileImg from "@/assets/profile.jpg";
 import Parallax from "@/components/Parallax";
 import { MaskRevealLines } from "@/components/MaskReveal";
+import Collectible from "@/components/Collectible";
 
 const AboutSection = () => {
   return (
