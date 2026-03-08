@@ -3,6 +3,7 @@ import { useRef } from "react";
 import profileImg from "@/assets/profile.jpg";
 import Parallax from "@/components/Parallax";
 import { MaskRevealLines } from "@/components/MaskReveal";
+import Collectible from "@/components/Collectible";
 
 const AboutSection = () => {
   return (
@@ -54,6 +55,7 @@ const AboutSection = () => {
                 Currently focused on full-stack development with React, Node.js, and exploring the intersections of AI with everyday applications.
               </p>
             </div>
+            <Collectible id="knowledge" icon="📘" label="Knowledge" className="mt-2" />
             <div className="editorial-divider" />
             <div>
               <p className="font-body text-sm tracking-[0.3em] uppercase text-accent mb-4">Tools & Technologies</p>

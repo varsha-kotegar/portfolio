@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { MaskRevealLines } from "@/components/MaskReveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
+import Collectible from "@/components/Collectible";
 
 const links = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/varshakotegar" },
@@ -53,6 +54,10 @@ const ContactSection = () => {
         >
           varshakotegar26@gmail.com
         </motion.a>
+
+        <div className="flex justify-center mb-8">
+          <Collectible id="future" icon="🚀" label="Future" />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

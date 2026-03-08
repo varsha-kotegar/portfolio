@@ -12,6 +12,9 @@ import Footer from "@/components/Footer";
 import HeroPreview from "@/components/HeroPreview";
 import SectionTransition from "@/components/SectionTransition";
 import { PageTransitionProvider } from "@/components/PageTransition";
+import { GamificationProvider } from "@/context/GamificationContext";
+import ScrollQuest from "@/components/ScrollQuest";
+import AchievementPopup from "@/components/AchievementPopup";
 
 const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,15 +24,10 @@ const Index = () => {
   const triggerLoop = useCallback(() => {
     if (loopLock.current) return;
     loopLock.current = true;
-
-    // 1. Fade overlay in
     setLooping(true);
 
-    // 2. After overlay is opaque, instantly jump to top
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-
-      // 3. Fade overlay out
       requestAnimationFrame(() => {
         setTimeout(() => {
           setLooping(false);
@@ -45,7 +43,6 @@ const Index = () => {
       const el = document.documentElement;
       const scrollTop = el.scrollTop;
       const scrollHeight = el.scrollHeight - el.clientHeight;
-
       if (scrollTop >= scrollHeight - 30) {
         triggerLoop();
       }
@@ -56,50 +53,54 @@ const Index = () => {
   }, [triggerLoop]);
 
   return (
-    <PageTransitionProvider>
-      <div ref={containerRef} className="min-h-screen bg-background">
-        <CustomCursor />
-        <XPProgressBar />
-        <Navbar />
-        <HeroSection />
+    <GamificationProvider>
+      <PageTransitionProvider>
+        <div ref={containerRef} className="min-h-screen bg-background">
+          <CustomCursor />
+          <XPProgressBar />
+          <Navbar />
+          <ScrollQuest />
+          <AchievementPopup />
+          <HeroSection />
 
-        <SectionTransition>
-          <div className="editorial-divider max-w-7xl mx-auto" />
-        </SectionTransition>
+          <SectionTransition>
+            <div className="editorial-divider max-w-7xl mx-auto" />
+          </SectionTransition>
 
-        <ProjectsSection />
+          <ProjectsSection />
 
-        <SectionTransition>
-          <div className="editorial-divider max-w-7xl mx-auto" />
-          <AboutSection />
-        </SectionTransition>
+          <SectionTransition>
+            <div className="editorial-divider max-w-7xl mx-auto" />
+            <AboutSection />
+          </SectionTransition>
 
-        <SectionTransition>
-          <SkillsSection />
-        </SectionTransition>
+          <SectionTransition>
+            <SkillsSection />
+          </SectionTransition>
 
-        <SectionTransition>
-          <div className="editorial-divider max-w-7xl mx-auto" />
-          <AchievementsSection />
-        </SectionTransition>
+          <SectionTransition>
+            <div className="editorial-divider max-w-7xl mx-auto" />
+            <AchievementsSection />
+          </SectionTransition>
 
-        <SectionTransition>
-          <ContactSection />
-        </SectionTransition>
+          <SectionTransition>
+            <ContactSection />
+          </SectionTransition>
 
-        <Footer />
-        <HeroPreview />
+          <Footer />
+          <HeroPreview />
 
-        {/* Circular scroll fade overlay */}
-        <div
-          className="fixed inset-0 z-[9999] pointer-events-none bg-background"
-          style={{
-            opacity: looping ? 1 : 0,
-            transition: "opacity 0.45s ease-in-out",
-          }}
-        />
-      </div>
-    </PageTransitionProvider>
+          {/* Circular scroll fade overlay */}
+          <div
+            className="fixed inset-0 z-[9999] pointer-events-none bg-background"
+            style={{
+              opacity: looping ? 1 : 0,
+              transition: "opacity 0.45s ease-in-out",
+            }}
+          />
+        </div>
+      </PageTransitionProvider>
+    </GamificationProvider>
   );
 };
 

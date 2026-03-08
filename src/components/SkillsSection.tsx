@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Collectible from "@/components/Collectible";
 
 const skillCategories = [
   {
@@ -39,6 +40,7 @@ const SkillsSection = () => {
         >
           <p className="font-body text-sm tracking-[0.3em] uppercase text-accent mb-4">Expertise</p>
           <h2 className="editorial-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground">Skills</h2>
+          <Collectible id="engineering" icon="⚙" label="Engineering" className="mt-4" />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
