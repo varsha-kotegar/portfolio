@@ -6,7 +6,6 @@ const navItems = ["Home", "Projects", "About", "Achievements", "Contact"];
 
 const Navbar = () => {
   const [active, setActive] = useState("Home");
-  const [isHovering, setIsHovering] = useState(false);
   const [hovered, setHovered] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,6 +21,8 @@ const Navbar = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const highlighted = hovered ?? active;
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
@@ -30,38 +31,29 @@ const Navbar = () => {
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
     >
       <div
-        className="relative"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => { setIsHovering(false); setHovered(null); }}
+        className="rounded-full px-3 py-2"
+        style={{ backgroundColor: "#ECEBE7" }}
+        onMouseLeave={() => setHovered(null)}
       >
-        {/* Background pill - visible by default, hides on hover */}
-        <motion.div
-          className="absolute inset-0 rounded-full border border-border"
-          animate={{
-            backgroundColor: isHovering ? "hsla(var(--muted), 0)" : "hsla(var(--muted), 0.6)",
-            borderColor: isHovering ? "transparent" : "hsl(var(--border))",
-          }}
-          transition={{ duration: 0.3 }}
-        />
-
-        <ul className="relative flex items-center gap-8 px-6 py-2.5">
+        <ul className="flex items-center gap-1">
           {navItems.map((item) => (
             <li key={item} className="relative">
               <button
                 onClick={() => handleClick(item)}
                 onMouseEnter={() => setHovered(item)}
-                className="relative px-5 py-2 text-sm font-body font-medium tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="relative px-6 py-2.5 text-sm font-body font-medium tracking-widest uppercase transition-colors duration-200"
+                style={{ color: "#3A3A37" }}
               >
-                {/* Per-item hover pill */}
-                {isHovering && hovered === item && (
+                {highlighted === item && (
                   <motion.span
-                    layoutId="navbar-hover"
-                    className="absolute inset-0 bg-muted rounded-full"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    layoutId="navbar-pill"
+                    className="absolute inset-0 rounded-full"
+                    style={{ backgroundColor: "#E1DFD9" }}
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10 flex items-center gap-1">
-                  {item === "Home" ? <Home className="w-4 h-4" /> : item}
+                <span className="relative z-10 flex items-center justify-center">
+                  {item === "Home" ? <Home className="w-4 h-4" strokeWidth={2} /> : item}
                 </span>
               </button>
             </li>
