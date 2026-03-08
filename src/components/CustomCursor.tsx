@@ -5,8 +5,9 @@ const CustomCursor = () => {
   const [visible, setVisible] = useState(false);
   const [hoverText, setHoverText] = useState("");
   const [isHovering, setIsHovering] = useState(false);
-  const cursorX = useSpring(0, { stiffness: 300, damping: 28 });
-  const cursorY = useSpring(0, { stiffness: 300, damping: 28 });
+  const [isButton, setIsButton] = useState(false);
+  const cursorX = useSpring(0, { stiffness: 350, damping: 30 });
+  const cursorY = useSpring(0, { stiffness: 350, damping: 30 });
   const isTouchDevice = useRef(false);
 
   useEffect(() => {
@@ -25,16 +26,24 @@ const CustomCursor = () => {
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const interactive = target.closest("[data-cursor]");
+      const isBtn = target.closest("button, [role='button']");
+      const isLink = target.closest("a");
+
       if (interactive) {
         setIsHovering(true);
+        setIsButton(false);
         setHoverText((interactive as HTMLElement).dataset.cursor || "");
-      } else if (
-        target.closest("a, button, [role='button'], input, textarea, select")
-      ) {
+      } else if (isBtn) {
         setIsHovering(true);
+        setIsButton(true);
+        setHoverText("");
+      } else if (isLink) {
+        setIsHovering(true);
+        setIsButton(false);
         setHoverText("");
       } else {
         setIsHovering(false);
+        setIsButton(false);
         setHoverText("");
       }
     };
@@ -57,7 +66,8 @@ const CustomCursor = () => {
 
   if (isTouchDevice.current) return null;
 
-  const size = isHovering ? (hoverText ? 100 : 50) : 12;
+  const size = hoverText ? 100 : isHovering ? 40 : 10;
+  const cursorOpacity = isButton ? 0.5 : 1;
 
   return (
     <motion.div
@@ -71,28 +81,27 @@ const CustomCursor = () => {
       animate={{
         width: size,
         height: size,
-        opacity: visible ? 1 : 0,
+        opacity: visible ? cursorOpacity : 0,
       }}
       transition={{
-        width: { type: "spring", stiffness: 300, damping: 25 },
-        height: { type: "spring", stiffness: 300, damping: 25 },
-        opacity: { duration: 0.2 },
+        width: { type: "spring", stiffness: 350, damping: 28 },
+        height: { type: "spring", stiffness: 350, damping: 28 },
+        opacity: { duration: 0.15 },
       }}
     >
       <div
-        className="w-full h-full rounded-full flex items-center justify-center"
+        className="w-full h-full rounded-full flex items-center justify-center transition-colors duration-200"
         style={{
           backgroundColor: isHovering
-            ? "rgba(58, 58, 55, 0.9)"
-            : "rgba(58, 58, 55, 0.7)",
-          mixBlendMode: isHovering ? "normal" : "normal",
+            ? "rgba(58, 58, 55, 0.85)"
+            : "rgba(58, 58, 55, 0.6)",
         }}
       >
         {hoverText && (
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-[10px] font-body font-medium tracking-wider uppercase text-white whitespace-nowrap"
+            className="text-[9px] font-body font-medium tracking-wider uppercase text-white whitespace-nowrap"
           >
             {hoverText}
           </motion.span>
