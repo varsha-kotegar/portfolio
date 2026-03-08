@@ -11,6 +11,7 @@ const Navbar = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dark, setDark] = useState(() => document.documentElement.classList.contains("dark"));
   const { triggerTransition } = usePageTransition();
 
   useEffect(() => {
