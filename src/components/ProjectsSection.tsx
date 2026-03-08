@@ -142,7 +142,7 @@ const ProjectsSection = () => {
         {/* Header with mask reveal */}
         <div className="px-6 md:px-16 lg:px-24 mb-12">
           <MaskRevealLines
-            lines={["Selected Work", "Projects"]}
+            lines={["Projects"]}
             lineClassName="first:font-body first:text-sm first:tracking-[0.3em] first:uppercase first:text-accent first:mb-4 last:editorial-heading last:text-5xl md:last:text-6xl lg:last:text-7xl last:font-bold last:text-foreground"
           />
           <div className="flex items-end justify-between mt-6">
