@@ -3,10 +3,11 @@ import { MaskRevealLines } from "@/components/MaskReveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
 const links = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "GitHub", href: "https://github.com" },
-  { label: "Twitter", href: "https://twitter.com" },
-  { label: "Resume", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/varshakotegar" },
+  { label: "GitHub", href: "https://github.com/varsha-kotegar" },
+  { label: "X", href: "https://x.com/varsha_kotegar" },
+  { label: "LeetCode", href: "https://leetcode.com/u/varsha-kotegar/" },
+  { label: "Resume", href: "/resume.pdf" },
 ];
 
 const MagneticLink = ({ link }: { link: typeof links[0] }) => {
@@ -46,11 +47,11 @@ const ContactSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          href="mailto:varsha@gmail.com"
+          href="mailto:varshakotegar26@gmail.com"
           className="inline-block font-display italic text-2xl md:text-4xl text-accent hover:text-foreground transition-colors duration-300 mb-16"
           data-cursor="Email"
         >
-          varsha@gmail.com
+          varshakotegar26@gmail.com
         </motion.a>
 
         <motion.div

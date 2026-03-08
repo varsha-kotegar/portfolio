@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Twitter, Code } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -8,14 +8,17 @@ const Footer = () => {
           © {new Date().getFullYear()} Varsha Kotegar. All rights reserved.
         </p>
         <div className="flex gap-6">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="https://github.com/varsha-kotegar" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
             <Github size={18} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="https://www.linkedin.com/in/varshakotegar" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
             <Linkedin size={18} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+          <a href="https://x.com/varsha_kotegar" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
             <Twitter size={18} />
+          </a>
+          <a href="https://leetcode.com/u/varsha-kotegar/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+            <Code size={18} />
           </a>
         </div>
       </div>
