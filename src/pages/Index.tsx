@@ -8,6 +8,7 @@ import SkillsSection from "@/components/SkillsSection";
 import AchievementsSection from "@/components/AchievementsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import HeroPreview from "@/components/HeroPreview";
 
 const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,22 +22,14 @@ const Index = () => {
       const scrollTop = el.scrollTop;
       const scrollHeight = el.scrollHeight - el.clientHeight;
 
-      if (scrollTop >= scrollHeight - 2) {
+      // Trigger when user is near the bottom of the hero preview
+      if (scrollTop >= scrollHeight - 100) {
         loopTriggered = true;
 
-        // Wait 1.5s so user sees the footer, then fade and loop
         setTimeout(() => {
-          document.body.style.transition = "opacity 0.5s ease";
-          document.body.style.opacity = "0";
-
-          setTimeout(() => {
-            window.scrollTo({ top: 0 });
-            requestAnimationFrame(() => {
-              document.body.style.opacity = "1";
-              loopTriggered = false;
-            });
-          }, 500);
-        }, 1500);
+          window.scrollTo({ top: 0 });
+          loopTriggered = false;
+        }, 200);
       }
     };
 
@@ -58,6 +51,8 @@ const Index = () => {
       <AchievementsSection />
       <ContactSection />
       <Footer />
+      {/* Duplicate hero preview for circular scroll illusion */}
+      <HeroPreview />
     </div>
   );
 };
