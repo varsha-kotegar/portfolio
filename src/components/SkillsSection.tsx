@@ -1,69 +1,63 @@
 import { motion } from "framer-motion";
+import { Code2 } from "lucide-react";
 
-const skillCategories = [
-  {
-    title: "Frontend Development",
-    skills: [
-      { label: "Languages", items: "JavaScript (ES6+), TypeScript" },
-      { label: "Frameworks", items: "React.js, Next.js" },
-      { label: "Styling & Markup", items: "HTML5, CSS3, Tailwind CSS" },
-    ],
-  },
-  {
-    title: "Backend & Databases",
-    skills: [
-      { label: "Runtime", items: "Node.js, Express.js" },
-      { label: "Databases", items: "MongoDB, MySQL" },
-    ],
-  },
-  {
-    title: "Emerging Tech & Tools",
-    skills: [
-      { label: "AI/ML", items: "Machine Learning Fundamentals" },
-      { label: "Version Control", items: "Git, GitHub" },
-      { label: "Tools", items: "Docker, CI/CD, Postman" },
-    ],
-  },
+const technologies = [
+  "Java",
+  "C",
+  "C++",
+  "Python",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Next.js",
+  "ExpressJS",
+  "Flask",
+  "PostgreSQL",
+  "MongoDB",
+  "AWS",
+  "Docker",
 ];
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="section-padding bg-card">
+    <section id="skills" className="section-padding bg-foreground">
       <div className="max-w-7xl mx-auto">
+        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="flex items-center gap-3 mb-10"
         >
-          <p className="font-body text-sm tracking-[0.3em] uppercase text-accent mb-4">Expertise</p>
-          <h2 className="editorial-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground">Skills</h2>
+          <Code2 className="w-5 h-5 text-accent" />
+          <h2 className="font-body text-base text-background/70">
+            Technologies I work with:
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {skillCategories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 30 }}
+        {/* Tech pills */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap gap-3"
+        >
+          {technologies.map((tech, i) => (
+            <motion.span
+              key={tech}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              transition={{ duration: 0.3, delay: 0.25 + i * 0.04 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-background/10 border border-background/15 font-body text-sm text-background/85 hover:bg-background/15 hover:border-accent/40 hover:text-background transition-all duration-300"
             >
-              <h3 className="font-display text-xl font-semibold text-foreground mb-6 pb-4 border-b border-accent">
-                {cat.title}
-              </h3>
-              <div className="space-y-4">
-                {cat.skills.map((skill) => (
-                  <div key={skill.label}>
-                    <p className="font-body text-xs tracking-[0.2em] uppercase text-accent mb-1">{skill.label}</p>
-                    <p className="font-body text-muted-foreground">{skill.items}</p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              {tech}
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
