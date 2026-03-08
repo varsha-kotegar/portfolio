@@ -94,7 +94,7 @@ const Navbar = () => {
           onMouseLeave={() => setHovered(null)}
         >
           <ul className="flex items-center gap-0.5">
-            {navItems.map((item) => (
+            {navItems.filter(i => i !== "Home").map((item) => (
               <li key={item} className="relative">
                 <button
                   onClick={() => handleClick(item)}
@@ -108,7 +108,7 @@ const Navbar = () => {
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
-                  <span className="relative z-10">{item === "Home" ? <span className="text-base">⌂</span> : item}</span>
+                  <span className="relative z-10">{item}</span>
                 </button>
               </li>
             ))}
