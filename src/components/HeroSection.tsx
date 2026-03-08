@@ -23,7 +23,7 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="editorial-heading text-7xl sm:text-8xl md:text-9xl font-bold text-foreground"
             >
-              Varsha
+              Varsha Kotegar
             </motion.h1>
 
             <motion.p
