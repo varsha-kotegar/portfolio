@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import CustomCursor from "@/components/CustomCursor";
+import XPProgressBar from "@/components/XPProgressBar";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProjectsSection from "@/components/ProjectsSection";
