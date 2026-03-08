@@ -65,7 +65,9 @@ const coverImages: Record<string, string> = {
  * Content goes here...
  */
 function parseMarkdownPost(raw: string): BlogPost {
-  const frontmatterMatch = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  // Normalize line endings (CRLF → LF) to handle Windows/git differences
+  const normalized = raw.replace(/\r\n/g, "\n").trim();
+  const frontmatterMatch = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!frontmatterMatch) {
     throw new Error("Invalid markdown: missing frontmatter");
   }
