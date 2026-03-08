@@ -38,13 +38,13 @@ const Navbar = () => {
         style={{ backgroundColor: "#ECEBE7" }}
         onMouseLeave={() => setHovered(null)}
       >
-        <ul className="flex items-center gap-1">
+        <ul className="flex items-center gap-0">
           {navItems.map((item) => (
             <li key={item} className="relative">
               <button
                 onClick={() => handleClick(item)}
                 onMouseEnter={() => setHovered(item)}
-                className="relative px-6 py-2.5 text-sm font-body font-medium tracking-widest uppercase transition-colors duration-200"
+                className="relative px-4 py-2 text-xs font-body font-medium tracking-widest uppercase transition-colors duration-200"
                 style={{ color: "#3A3A37" }}
               >
                 {highlighted === item && (
