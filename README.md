@@ -1,73 +1,79 @@
-# Welcome to your Lovable project
+# Varsha Kotegar — Portfolio
 
-## Project info
+An editorial-style, premium developer portfolio built with modern web technologies. Designed for performance, accessibility, and a seamless user narrative.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Overview
 
-## How can I edit this code?
+This project is a high-performance, responsive portfolio that showcases projects, skills, and achievements with a focus on clean typography and smooth, purposeful animations. It features a fully integrated backend for contact management.
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: [React 18](https://reactjs.org/), [Vite](https://vitejs.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Framer Motion](https://www.framer.com/motion/) (Animations)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Backend**: Serverless API (Node.js)
+- **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas)
+- **Email Service**: [Resend](https://resend.com/)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Key Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Editorial Design**: Large typography, generous whitespace, and a high-contrast theme.
+- **Smooth Narratives**: Section-based transitions and reveal animations using Framer Motion.
+- **Interactive Elements**: Magnetic hover effects and custom cursor interactions.
+- **Integrated Contact Form**: A functional backend that validates inputs using **Zod**, stores messages in **MongoDB**, and triggers real-time email notifications via **Resend**.
+- **Responsive & Optimized**: Built with mobile-first principles and optimized for SEO.
 
-**Use your preferred IDE**
+## 📥 Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [npm](https://www.npmjs.com/)
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/varsha-kotegar/varsha-s-editorial-studio.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd varsha-s-editorial-studio
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Configuration
 
-# Step 3: Install the necessary dependencies.
-npm i
+Create a `.env.local` file in the root directory and add the following:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```env
+MONGODB_URI=your_mongodb_connection_string
+RESEND_API_KEY=your_resend_api_key
 ```
 
-**Edit a file directly in GitHub**
+### Running Locally
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run dev
+```
+Open [http://localhost:8080](http://localhost:8080) to view the application.
 
-**Use GitHub Codespaces**
+## 📂 Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- `/api`: Serverless API routes (Server-side logic)
+- `/src/components`: Reusable UI elements and layout sections
+- `/src/hooks`: Custom React hooks for interactions
+- `/src/lib`: Shared utilities and database connectivity
+- `/src/pages`: Main view components
+- `/public`: Static assets
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+This project is optimized for deployment on [Vercel](https://vercel.com/) or similar platforms that support serverless functions. Simply push your code to your repository and connect it to a Vercel project with the environment variables configured.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+---
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Built with ❤️ by [Varsha Kotegar](https://www.linkedin.com/in/varshakotegar)
