@@ -24,12 +24,13 @@ const Index = () => {
       const scrollTop = el.scrollTop;
       const scrollHeight = el.scrollHeight - el.clientHeight;
 
-      if (scrollTop >= scrollHeight - 100) {
+      if (scrollTop >= scrollHeight - 50) {
         loopTriggered = true;
-        setTimeout(() => {
-          window.scrollTo({ top: 0 });
+        // Don't reverse — just instantly reset to top so next scroll continues forward
+        window.scrollTo({ top: 1 }); // 1px to avoid re-triggering
+        requestAnimationFrame(() => {
           loopTriggered = false;
-        }, 200);
+        });
       }
     };
 

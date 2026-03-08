@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { MaskRevealLines } from "@/components/MaskReveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
@@ -22,11 +21,11 @@ const MagneticLink = ({ link }: { link: typeof links[0] }) => {
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-1 font-body text-sm tracking-wider uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+      className="group px-6 py-3 border rounded-full font-body text-xs tracking-[0.25em] uppercase transition-all duration-300 hover:bg-foreground hover:text-background"
+      style={{ ...magnetic.style, borderColor: "rgba(0,0,0,0.15)", color: "#3A3A37" }}
       data-cursor="Open"
     >
       {link.label}
-      <ArrowUpRight size={14} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
     </motion.a>
   );
 };
