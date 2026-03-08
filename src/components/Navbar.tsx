@@ -36,79 +36,89 @@ const Navbar = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.5 }}
-      className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
+      className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24"
     >
-      {/* Desktop */}
       <div
-        className="hidden md:block rounded-full px-3 py-2"
+        className="max-w-7xl mx-auto flex items-center justify-between py-4 border-b transition-colors duration-300"
         style={{
-          backgroundColor: "#E8E6DF",
-          border: "1px solid rgba(0, 0, 0, 0.05)",
+          borderColor: scrolled ? "rgba(0,0,0,0.08)" : "transparent",
+          backgroundColor: scrolled ? "hsla(50, 7%, 95%, 0.85)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
         }}
-        onMouseLeave={() => setHovered(null)}
       >
-        <ul className="flex items-center gap-0.5">
-          {navItems.map((item) => (
-            <li key={item} className="relative">
-              <button
-                onClick={() => handleClick(item)}
-                onMouseEnter={() => setHovered(item)}
-                className="relative px-5 py-2 text-xs font-body font-medium tracking-widest uppercase transition-colors duration-200"
-                style={{ color: "#3A3A37" }}
-              >
-                {highlighted === item && (
-                  <motion.span
-                    layoutId="navbar-pill"
-                    className="absolute inset-0 rounded-full"
-                    style={{ backgroundColor: "#DBD9D2" }}
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10 flex items-center justify-center">
-                  {item === "Home" ? <Home className="w-3.5 h-3.5" strokeWidth={2} /> : item}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Mobile */}
-      <div className="md:hidden">
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="rounded-full p-3"
-          style={{ backgroundColor: "#E8E6DF", color: "#3A3A37", border: "1px solid rgba(0,0,0,0.05)" }}
+        {/* Brand */}
+        <a
+          href="#home"
+          onClick={(e) => { e.preventDefault(); handleClick("Home"); }}
+          className="font-display text-lg md:text-xl font-bold tracking-tight text-foreground hover:text-accent transition-colors duration-300"
+          data-cursor="Home"
         >
-          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+          Varsha Kotegar
+        </a>
 
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute top-14 left-1/2 -translate-x-1/2 rounded-2xl px-4 py-3 min-w-[200px]"
-            style={{ backgroundColor: "#E8E6DF", border: "1px solid rgba(0,0,0,0.05)" }}
+        {/* Desktop nav */}
+        <div
+          className="hidden md:block rounded-full px-3 py-2"
+          style={{
+            backgroundColor: "hsl(var(--muted))",
+            border: "1px solid hsl(var(--border))",
+          }}
+          onMouseLeave={() => setHovered(null)}
+        >
+          <ul className="flex items-center gap-0.5">
+            {navItems.filter(i => i !== "Home").map((item) => (
+              <li key={item} className="relative">
+                <button
+                  onClick={() => handleClick(item)}
+                  onMouseEnter={() => setHovered(item)}
+                  className="relative px-5 py-2 text-xs font-body font-medium tracking-widest uppercase text-foreground transition-colors duration-200"
+                >
+                  {highlighted === item && (
+                    <motion.span
+                      layoutId="navbar-pill"
+                      className="absolute inset-0 rounded-full bg-background"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{item}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Mobile toggle */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="rounded-full p-3 bg-muted border border-border text-foreground"
           >
-            <ul className="flex flex-col gap-1">
-              {navItems.map((item) => (
-                <li key={item}>
-                  <button
-                    onClick={() => handleClick(item)}
-                    className={`w-full text-left px-4 py-2.5 text-sm font-body font-medium tracking-widest uppercase rounded-full transition-colors duration-200 ${
-                      active === item ? "bg-[#DBD9D2]" : ""
-                    }`}
-                    style={{ color: "#3A3A37" }}
-                  >
-                    <span className="flex items-center gap-2">
-                      {item === "Home" ? <Home className="w-4 h-4" strokeWidth={2} /> : item}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="absolute top-16 right-0 rounded-2xl px-4 py-3 min-w-[200px] bg-card/95 backdrop-blur-md border border-border shadow-lg"
+            >
+              <ul className="flex flex-col gap-1">
+                {navItems.filter(i => i !== "Home").map((item) => (
+                  <li key={item}>
+                    <button
+                      onClick={() => handleClick(item)}
+                      className={`w-full text-left px-4 py-2.5 text-sm font-body font-medium tracking-widest uppercase rounded-full text-foreground transition-colors duration-200 ${
+                        active === item ? "bg-muted" : ""
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </div>
       </div>
     </motion.nav>
   );

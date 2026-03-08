@@ -1,9 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { useMagnetic } from "@/hooks/use-magnetic";
 import { MaskRevealLines } from "@/components/MaskReveal";
-import Collectible from "@/components/Collectible";
 
 const projects = [
   {
@@ -143,11 +142,11 @@ const ProjectsSection = () => {
         {/* Header with mask reveal */}
         <div className="px-6 md:px-16 lg:px-24 mb-12">
           <MaskRevealLines
-            lines={["Selected Work", "Projects"]}
+            lines={["Projects"]}
             lineClassName="first:font-body first:text-sm first:tracking-[0.3em] first:uppercase first:text-accent first:mb-4 last:editorial-heading last:text-5xl md:last:text-6xl lg:last:text-7xl last:font-bold last:text-foreground"
           />
           <div className="flex items-end justify-between mt-6">
-            <Collectible id="idea" icon="💡" label="Idea" />
+            <div /> {/* spacer */}
             <p className="hidden md:block font-body text-sm text-muted-foreground tracking-wider">
               {String(totalCards).padStart(2, "0")} Projects
             </p>
