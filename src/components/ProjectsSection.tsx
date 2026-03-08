@@ -140,17 +140,14 @@ const ProjectsSection = () => {
     <section ref={sectionRef} id="projects" className="relative" style={{ height: `${totalCards * 60}vh` }}>
       <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
         {/* Header with mask reveal */}
-        <div className="px-6 md:px-16 lg:px-24 mb-12">
+        <div className="px-6 md:px-16 lg:px-24 mb-12 flex items-end justify-between">
           <MaskRevealLines
             lines={["Projects"]}
-            lineClassName="first:font-body first:text-sm first:tracking-[0.3em] first:uppercase first:text-accent first:mb-4 last:editorial-heading last:text-5xl md:last:text-6xl lg:last:text-7xl last:font-bold last:text-foreground"
+            lineClassName="editorial-heading text-5xl md:text-6xl lg:text-7xl font-bold text-foreground"
           />
-          <div className="flex items-end justify-between mt-6">
-            <div /> {/* spacer */}
-            <p className="hidden md:block font-body text-sm text-muted-foreground tracking-wider">
-              {String(totalCards).padStart(2, "0")} Projects
-            </p>
-          </div>
+          <p className="hidden md:block font-body text-sm text-muted-foreground tracking-wider">
+            {String(totalCards).padStart(2, "0")} Projects
+          </p>
         </div>
 
         {/* Horizontal scroll track */}
