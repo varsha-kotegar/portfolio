@@ -10,23 +10,29 @@ const HeroSection = () => {
     offset: ["start start", "end start"],
   });
 
-  // Name block shrinks and lifts
   const nameScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.55]);
-  const nameY = useTransform(scrollYProgress, [0, 0.35], ["0vh", "-12vh"]);
+  const nameY = useTransform(scrollYProgress, [0, 0.35], ["0vh", "-8vh"]);
 
-  // Content reveals on scroll
-  const contentOpacity = useTransform(scrollYProgress, [0.18, 0.4], [0, 1]);
-  const contentY = useTransform(scrollYProgress, [0.18, 0.4], [60, 0]);
+  const contentOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
+  const contentY = useTransform(scrollYProgress, [0.15, 0.35], [40, 0]);
 
-  // Scroll indicator
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   return (
-    <section ref={sectionRef} id="home" className="relative" style={{ height: "220vh" }}>
+    <section ref={sectionRef} id="home" className="relative" style={{ height: "200vh" }}>
+      {/* Subtle grain texture overlay */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+        }}
+      />
+
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="w-full max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
 
-          {/* Name block — centered initially */}
+          {/* Name block */}
           <motion.div
             style={{ scale: nameScale, y: nameY }}
             className="origin-center will-change-transform text-center"
@@ -35,8 +41,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-body text-[10px] md:text-xs tracking-[0.5em] uppercase mb-6"
-              style={{ color: "#3A3A37" }}
+              className="font-body text-[10px] md:text-xs tracking-[0.5em] uppercase mb-4 text-muted-foreground"
             >
               Developer · Writer · Explorer
             </motion.p>
@@ -48,26 +53,32 @@ const HeroSection = () => {
               className="editorial-heading leading-[0.88] tracking-tight"
               style={{ fontSize: "clamp(3.5rem, 11vw, 11rem)" }}
             >
-              <span className="block font-black" style={{ color: "#9A9A6A" }}>
+              <span className="block font-black text-accent">
                 Varsha
               </span>
-              <span className="block font-bold" style={{ color: "#111111", fontSize: "clamp(3rem, 9vw, 9rem)" }}>
+              <span className="block font-bold text-foreground" style={{ fontSize: "clamp(3rem, 9vw, 9rem)" }}>
                 Kotegar
               </span>
             </motion.h1>
 
-            {/* Tagline directly under name */}
+            {/* Editorial divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-auto mt-5 mb-4 h-px w-32 md:w-48 origin-center bg-accent/40"
+            />
+
+            {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="font-display italic text-base md:text-xl mt-6"
-              style={{ color: "#9A9A6A" }}
+              className="font-display italic text-lg md:text-2xl text-accent"
             >
               "An odyssey in engineering; a narrative in progress."
             </motion.p>
 
-            {/* Subtle breathing animation after load */}
             <motion.div
               animate={{ opacity: [1, 0.92, 1] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 2.5 }}
@@ -75,16 +86,20 @@ const HeroSection = () => {
             />
           </motion.div>
 
-          {/* Two-column content — fades in on scroll */}
+          {/* Two-column content */}
           <motion.div
             style={{ opacity: contentOpacity, y: contentY }}
-            className="absolute bottom-[10vh] left-0 right-0 px-6 md:px-16 lg:px-24"
+            className="absolute bottom-[12vh] left-0 right-0 px-6 md:px-16 lg:px-24"
           >
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-end">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
               {/* Left — Photo */}
-              <div className="md:col-span-4">
-                <div className="relative w-fit">
-                  <div className="w-44 h-56 md:w-56 md:h-72 overflow-hidden rounded-sm">
+              <div className="md:col-span-4 flex justify-center md:justify-start">
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                  className="relative w-fit"
+                >
+                  <div className="w-40 h-52 md:w-52 md:h-64 overflow-hidden rounded-sm">
                     <img
                       src={profileImg}
                       alt="Varsha Kotegar"
@@ -92,20 +107,23 @@ const HeroSection = () => {
                     />
                   </div>
                   <div
-                    className="absolute -bottom-2 -right-2 w-44 h-56 md:w-56 md:h-72 rounded-sm -z-10"
-                    style={{ border: "1px solid rgba(154, 154, 106, 0.3)" }}
+                    className="absolute -bottom-2 -right-2 w-40 h-52 md:w-52 md:h-64 rounded-sm -z-10 border border-accent/30"
                   />
-                </div>
+                </motion.div>
               </div>
 
               {/* Right — Intro text */}
-              <div className="md:col-span-8 flex flex-col justify-end">
-                <p
-                  className="font-body text-sm md:text-base max-w-[520px]"
-                  style={{ color: "#3A3A37", lineHeight: 1.7 }}
+              <div className="md:col-span-8 flex flex-col justify-center">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="font-body text-sm md:text-base max-w-[520px] text-muted-foreground"
+                  style={{ lineHeight: 1.7 }}
                 >
                   As a third-year engineering student, I am mastering the technical building blocks of my field while refining my voice as a writer and speaker — driven by a passion for exploring new technologies and translating them into stories that make people smarter.
-                </p>
+                </motion.p>
               </div>
             </div>
           </motion.div>
@@ -116,19 +134,18 @@ const HeroSection = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.8 }}
             style={{ opacity: indicatorOpacity }}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
-            <div className="w-6 h-10 border rounded-full flex justify-center pt-2" style={{ borderColor: "rgba(58, 58, 55, 0.25)" }}>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="w-0.5 h-1.5 rounded-full"
-                style={{ backgroundColor: "#3A3A37" }}
-              />
-            </div>
-            <span className="text-[10px] font-body tracking-[0.3em] uppercase" style={{ color: "#3A3A37" }}>
+            <span className="text-[10px] font-body tracking-[0.3em] uppercase text-muted-foreground">
               Scroll
             </span>
+            <div className="w-px h-8 bg-border relative overflow-hidden">
+              <motion.div
+                animate={{ y: ["-100%", "100%"] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                className="absolute inset-x-0 h-1/2 bg-accent/60"
+              />
+            </div>
           </motion.div>
         </div>
       </div>
