@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Home, Menu, X } from "lucide-react";
 import { usePageTransition } from "@/components/PageTransition";
 
-const navItems = ["Home", "Projects", "About", "Achievements", "Contact"];
+const navItems = ["Home", "Projects", "About", "Achievements", "Contact", "Blog"];
 
 const Navbar = () => {
   const [active, setActive] = useState("Home");
