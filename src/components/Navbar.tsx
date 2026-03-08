@@ -122,7 +122,7 @@ const Navbar = () => {
               className="absolute top-16 right-0 rounded-2xl px-4 py-3 min-w-[200px] bg-card/95 backdrop-blur-md border border-border shadow-lg"
             >
               <ul className="flex flex-col gap-1">
-                {navItems.filter(i => i !== "Home").map((item) => (
+                {navItems.map((item) => (
                   <li key={item}>
                     <button
                       onClick={() => handleClick(item)}
