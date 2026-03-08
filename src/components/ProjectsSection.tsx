@@ -84,6 +84,7 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               variants={fadeUp}
               className="group border border-border/60 rounded-sm p-4 pb-8 hover:border-accent/40 transition-all duration-500 bg-card/30"
+              data-cursor="View Project"
             >
               {/* Image placeholder */}
               <div

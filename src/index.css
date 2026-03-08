@@ -95,6 +95,10 @@
     display: none;
   }
 
+  a, button, [role="button"], input, textarea, select, [data-cursor] {
+    cursor: none;
+  }
+
   body {
     @apply bg-background text-foreground font-body antialiased;
   }

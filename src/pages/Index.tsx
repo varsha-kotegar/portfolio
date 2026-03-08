@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import CustomCursor from "@/components/CustomCursor";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProjectsSection from "@/components/ProjectsSection";
@@ -29,6 +30,7 @@ const Index = () => {
 
   return (
     <div ref={containerRef} className="min-h-screen bg-background">
+      <CustomCursor />
       <Navbar />
       <HeroSection />
       <div className="editorial-divider max-w-7xl mx-auto" />
