@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Home, Menu, X } from "lucide-react";
+import { usePageTransition } from "@/components/PageTransition";
 
 const navItems = ["Home", "Projects", "About", "Achievements", "Contact"];
 
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { triggerTransition } = usePageTransition();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -17,10 +19,14 @@ const Navbar = () => {
   }, []);
 
   const handleClick = (item: string) => {
+    if (item === active) return;
     setActive(item);
     setMobileOpen(false);
-    const id = item.toLowerCase();
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+
+    triggerTransition(() => {
+      const id = item.toLowerCase();
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    });
   };
 
   const highlighted = hovered ?? active;

@@ -9,6 +9,8 @@ import AchievementsSection from "@/components/AchievementsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import HeroPreview from "@/components/HeroPreview";
+import SectionTransition from "@/components/SectionTransition";
+import { PageTransitionProvider } from "@/components/PageTransition";
 
 const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,10 +24,8 @@ const Index = () => {
       const scrollTop = el.scrollTop;
       const scrollHeight = el.scrollHeight - el.clientHeight;
 
-      // Trigger when user is near the bottom of the hero preview
       if (scrollTop >= scrollHeight - 100) {
         loopTriggered = true;
-
         setTimeout(() => {
           window.scrollTo({ top: 0 });
           loopTriggered = false;
@@ -38,22 +38,40 @@ const Index = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-background">
-      <CustomCursor />
-      <Navbar />
-      <HeroSection />
-      <div className="editorial-divider max-w-7xl mx-auto" />
-      <ProjectsSection />
-      <div className="editorial-divider max-w-7xl mx-auto" />
-      <AboutSection />
-      <SkillsSection />
-      <div className="editorial-divider max-w-7xl mx-auto" />
-      <AchievementsSection />
-      <ContactSection />
-      <Footer />
-      {/* Duplicate hero preview for circular scroll illusion */}
-      <HeroPreview />
-    </div>
+    <PageTransitionProvider>
+      <div ref={containerRef} className="min-h-screen bg-background">
+        <CustomCursor />
+        <Navbar />
+        <HeroSection />
+
+        <SectionTransition>
+          <div className="editorial-divider max-w-7xl mx-auto" />
+        </SectionTransition>
+
+        <ProjectsSection />
+
+        <SectionTransition>
+          <div className="editorial-divider max-w-7xl mx-auto" />
+          <AboutSection />
+        </SectionTransition>
+
+        <SectionTransition>
+          <SkillsSection />
+        </SectionTransition>
+
+        <SectionTransition>
+          <div className="editorial-divider max-w-7xl mx-auto" />
+          <AchievementsSection />
+        </SectionTransition>
+
+        <SectionTransition>
+          <ContactSection />
+        </SectionTransition>
+
+        <Footer />
+        <HeroPreview />
+      </div>
+    </PageTransitionProvider>
   );
 };
 
